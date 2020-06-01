@@ -17,6 +17,7 @@ def download(myinput, mydir = "./"):
         res.raise_for_status()
         #https://stackoverflow.com/questions/18727347/how-to-extract-a-filename-from-a-url-append-a-word-to-it
         outfile = mydir + "/" + os.path.basename(urlparse( str(myinput) ).path)
+        outfile = outfile.replace("'", '')
         playFile = open(outfile, 'wb')
         for chunk in res.iter_content(100000):
             playFile.write(chunk)
@@ -83,7 +84,7 @@ class Pinterest_Helper(object):
         return tmp2        
         
     
-    def runme(self,url, threshold = 50, persistence = 120, debug = False):
+    def runme(self,url, threshold = 30, persistence = 40, debug = False):
         final_results = []
         previmages = []
         tries = 0
@@ -126,7 +127,7 @@ class Pinterest_Helper(object):
             print("Exitting at end")
         return final_results
 
-    def runme_alt(self,url, threshold = 50, tol = 10, minwait = 1, maxwait = 2,debug = False):
+    def runme_alt(self,url, threshold = 30, tol = 10, minwait = 1, maxwait = 2,debug = False):
         final_results = []
         heights = []
         dwait = 0
